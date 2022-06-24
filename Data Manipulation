@@ -1,0 +1,100 @@
+#To load datasets package
+library("datasets")
+
+#To load iris dataset
+data(iris)
+summary(iris)
+
+#To return 5 random rows
+index<-sample(1:nrow(iris), 5)
+index
+iris[index,]
+
+
+#To find the frequency distribution of Species in iris table
+data(iris)
+freq.table <- table(iris$Species)
+head(freq.table)
+
+
+
+#To load dplyr package
+library("dplyr")
+#To load datasets package
+library("datasets")
+#To load iris dataset
+data(iris)
+summary(iris)
+
+#Select()
+
+#To select the following columns
+selected <- select(iris, Sepal.Length, Sepal.Width, Petal.Length)
+head(selected)
+#To select all columns from Sepal.Length to Petal.Length
+selected1 <- select(iris, Sepal.Length:Petal.Length)
+#To print first four rows
+head(selected1, 4)                           
+#To select columns with numeric indexes
+selected1 <- select(iris,c(3:5))
+head(selected1)
+
+#We use(-)to hide a particular column
+selected <- select(iris, -Sepal.Length, -Sepal.Width)
+head(selected)
+
+#Filter()
+
+#To select the first 3 rows with Species as setosa
+filtered <- filter(iris, Species == "setosa" )
+head(filtered,3)
+
+#To select the last 5 rows with Species as versicolor and Sepal width more than 3
+filtered1 <- filter(iris, Species == "versicolor", Sepal.Width > 3)
+tail(filtered1)
+
+#Mutate()
+
+#To create a column “Greater.Half” which stores TRUE if given condition is TRUE
+col1 <- mutate(iris, Greater.Half = Sepal.Width > 0.5 * Sepal.Length)
+tail(col1)
+
+#To check how many flowers satisfy this condition
+table(col1$Greater.Half)
+
+#Arrange()
+
+#To arrange Sepal Width in ascending order
+arranged <- arrange(col1, Sepal.Width)
+head(arranged)
+#To arrange Sepal Width in descending order
+arranged <- arrange(col1, desc(Sepal.Width))
+head(arranged)
+
+# Summarise()
+
+summarised <- summarise(arranged, Mean.Width = mean(Sepal.Width))
+head(summarised)
+
+#Grouping()
+
+
+#To find mean sepal width by Species, we use grouping as follows
+gp <- group_by(iris,Species)
+mn <- summarise(gp,Mean.Sepal = mean(Sepal.Width))
+head(mn)
+
+#Pipe Operator
+
+#To get rows with the following conditions
+iris %>% filter(Species == "setosa",Sepal.Width > 3.8)
+
+#To find mean Sepal Length by Species, we use pipe operator as follows
+iris  %>% group_by(Species) %>% summarise(Mean.Length = mean(Sepal.Length))
+
+#rename()
+
+# To rename the coloumns 
+
+renamed <- rename(iris, SW=Sepal.Width)
+head(renamed)
