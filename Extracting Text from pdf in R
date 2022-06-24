@@ -1,0 +1,27 @@
+install.packages("pdftools")
+
+library("pdftools")
+pdf.file <- "http://www.erodegrocery.in/wp/wp-content/uploads/2022/06/Name1.pdf"
+
+download.file(pdf.file, destfile = "name.pdf", mode = "wb")
+
+
+# Extract the text for all pages
+
+pdf.text <- pdf_text("name.pdf")
+
+# Display the third page text
+cat(pdf.text[[1]])
+
+
+
+
+
+# Renders pdf to bitmap array
+bitmap <- pdf_render_page("name.pdf", page = 2)
+
+# Save bitmap image
+png::writePNG(bitmap, "images/name-page-2.png")
+jpeg::writeJPEG(bitmap, "images/name-page-2.jpeg")
+webp::write_webp(bitmap, "images/name-page-2.webp")
+
