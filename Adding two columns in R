@@ -1,0 +1,36 @@
+#working directory
+getwd()
+#reading data 
+data<-read.csv("Marks.csv",1)
+#viewing data 
+View(data)
+#rows and column
+print(is.data.frame(data))
+print(ncol(data))
+print(nrow(data))
+
+str(data)
+data[, c(1, 2, 3)]
+
+data[, c(1, 2, 3)]
+library(tidyverse)
+#select particular coumn
+data %>% pull(maths)
+#range of selecting column
+data %>% select(1:3)
+#selecting particular column by selection column value
+data %>% select(1, 3)
+#selecting particular column by name
+data %>% select(Students , language1,language2)
+
+# add column1 and column2
+cutoff=print(data$physics + data$chemistry+data$maths)
+cutoff
+
+# Write filtered data into a new file.
+updated <- data.frame(cutoff)
+updated<-cbind(data,cutoff)
+print(updated)
+#output directory path to be defined
+write.csv(updated,"C:\\Users\\IIITDM-MECH DEPT\\Desktop\\R_kali\\updated_Marks.csv")
+print ('CSV file written Successfully :)')
