@@ -1,0 +1,41 @@
+import numpy as np
+import pandas as pd
+import os
+import matplotlib.pyplot as plt
+import pandas as pd
+#load the  files 1
+specimen1_df = pd.read_csv("2_-1-1.csv")
+specimen1_df.head()
+#load the  files 2
+specimen2_df = pd.read_csv("2_-2-1.csv")
+specimen2_df.head()
+#load the  files 3
+specimen3_df = pd.read_csv("2_-3-1.csv")
+specimen3_df.head()
+
+#FINDING MAX AND MIN
+p=specimen1_df['Stress (N/mm2 )'].max()
+q=specimen2_df['Stress (N/mm2 )'].max()
+r=specimen3_df['Stress (N/mm2 )'].max()
+print("the Max1",p)
+print("\n the Max2",q)
+print("\n the Max3",r)
+
+#loading
+
+strain1=specimen1_df['Strain (% )']
+stress1=specimen1_df['Stress (N/mm2 )']
+strain2=specimen2_df['Strain (% )']
+stress2=specimen2_df['Stress (N/mm2 )']
+strain3=specimen3_df['Strain (% )']
+stress3=specimen3_df['Stress (N/mm2 )']
+#plotting
+
+plt.plot(strain1,stress1,strain2,stress2,strain3,stress3)
+plt.xlabel('strain (mm/mm)')
+plt.ylabel('stress (MPa)')
+plt.title('Stress Strain Curve of 2% of NaOH in tension')
+plt.legend(['2%-1 ', '2%-2','2%-3'])
+plt.savefig('stress-strain_curve1 2%.png', dpi=3000, bbox_inches='tight') 
+plt.show()
+
